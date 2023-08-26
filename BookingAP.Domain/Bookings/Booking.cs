@@ -66,7 +66,7 @@ namespace BookingAP.Domain.Bookings
                                       BookingStatus.Reserved,
                                       createdOnUTC);
 
-            booking.RaisDomainEvent(new BookingCreatedDomainEvent(booking.Id));
+            booking.RaisDomainEvent(new BookingReservedDomainEvent(booking.Id));
 
             appartment.LastBookedOnUTC = createdOnUTC;
 

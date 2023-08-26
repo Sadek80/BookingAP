@@ -2,5 +2,5 @@
 
 namespace BookingAP.Domain.Bookings.Events
 {
-    public record BookingCreatedDomainEvent(Guid BookingId) : IDomainEvent;
+    public record BookingReservedDomainEvent(Guid BookingId) : IDomainEvent;
 }
