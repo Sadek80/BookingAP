@@ -1,7 +1,7 @@
-﻿using BookingAP.Application.Abstractions.Services;
+﻿using BookingAP.Application.Abstractions.Repositories.Bookings;
+using BookingAP.Application.Abstractions.Repositories.Users;
+using BookingAP.Application.Abstractions.Services;
 using BookingAP.Domain.Bookings.Events;
-using BookingAP.Domain.Bookings.Repositories;
-using BookingAP.Domain.Users.Repositories;
 using MediatR;
 
 namespace BookingAP.Application.Bookings.ReserveBooking

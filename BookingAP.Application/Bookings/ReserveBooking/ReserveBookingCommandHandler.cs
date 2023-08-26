@@ -1,12 +1,13 @@
 ﻿using BookingAP.Application.Abstractions.Clock;
 using BookingAP.Application.Abstractions.Messaging;
+using BookingAP.Application.Abstractions.Repositories;
+using BookingAP.Application.Abstractions.Repositories.Appartments;
+using BookingAP.Application.Abstractions.Repositories.Bookings;
+using BookingAP.Application.Abstractions.Repositories.Users;
 using BookingAP.Domain.Abstractions;
-using BookingAP.Domain.Appartments.Repositories;
 using BookingAP.Domain.Bookings;
-using BookingAP.Domain.Bookings.Repositories;
 using BookingAP.Domain.Bookings.Services;
 using BookingAP.Domain.Bookings.ValueObjects;
-using BookingAP.Domain.Users.Repositories;
 using ErrorOr;
 using static BookingAP.Domain.Appartments.DomainErrors;
 using static BookingAP.Domain.Bookings.DomainErrors;
