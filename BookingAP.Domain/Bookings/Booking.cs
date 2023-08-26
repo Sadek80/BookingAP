@@ -123,7 +123,7 @@ namespace BookingAP.Domain.Bookings
             return true;
         }
 
-        public ErrorOr<bool> Compeleted(DateTime utcNow)
+        public ErrorOr<bool> Complete(DateTime utcNow)
         {
             if (Status != BookingStatus.Confirmed)
             {
