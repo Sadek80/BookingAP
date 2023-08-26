@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using BookingAP.Application.Abstractions.Behaviors;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BookingAP.Application
 {
@@ -9,6 +10,8 @@ namespace BookingAP.Application
             services.AddMediatR(configuration =>
             {
                 configuration.RegisterServicesFromAssemblies(typeof(DependencyInjection).Assembly);
+
+                configuration.AddOpenBehavior(typeof(LoggingPipelineBehavior<,>));
             });
 
             return services;
