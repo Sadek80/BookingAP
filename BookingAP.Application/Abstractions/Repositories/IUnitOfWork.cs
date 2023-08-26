@@ -1,4 +1,4 @@
-﻿namespace BookingAP.Domain.Abstractions
+﻿namespace BookingAP.Application.Abstractions.Repositories
 {
     public interface IUnitOfWork
     {

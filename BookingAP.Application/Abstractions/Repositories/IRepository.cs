@@ -1,4 +1,6 @@
-﻿namespace BookingAP.Domain.Abstractions
+﻿using BookingAP.Domain.Abstractions;
+
+namespace BookingAP.Application.Abstractions.Repositories
 {
     public interface IRepository<T> where T : Entity
     {
