@@ -26,19 +26,18 @@ namespace BookingAP.Application.Abstractions.Behaviors
             var context = new ValidationContext<TRequest>(request);
 
             var validationErrors = _validators
-                .Select(validator => validator.Validate(context))
-                .Where(validationResult => validationResult.Errors.Any())
-                .SelectMany(validationResult => validationResult.Errors)
-                .ToList()
-                .ConvertAll(validationFailure =>
-                            Error.Validation(validationFailure.PropertyName,
-                                             validationFailure.ErrorMessage));
+                                    .Select(validator => validator.Validate(context))
+                                    .Where(validationResult => validationResult.Errors.Any())
+                                    .SelectMany(validationResult => validationResult.Errors)
+                                    .ToList()
+                                    .ConvertAll(validationFailure =>
+                                                Error.Validation(validationFailure.PropertyName,
+                                                                 validationFailure.ErrorMessage));
 
             if(validationErrors is null || !validationErrors.Any())
             {
                 return await next();
             }
-
 
             return (dynamic)validationErrors;
         }
