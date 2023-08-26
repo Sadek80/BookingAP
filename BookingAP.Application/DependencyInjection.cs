@@ -1,4 +1,6 @@
 ﻿using BookingAP.Application.Abstractions.Behaviors;
+using BookingAP.Domain.Bookings.Services;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BookingAP.Application
@@ -12,7 +14,13 @@ namespace BookingAP.Application
                 configuration.RegisterServicesFromAssemblies(typeof(DependencyInjection).Assembly);
 
                 configuration.AddOpenBehavior(typeof(LoggingPipelineBehavior<,>));
+
+                configuration.AddOpenBehavior(typeof(ValidationPipelineBehavior<,>));
             });
+
+            services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
+
+            services.AddTransient<BookingPricingService>();
 
             return services;
         }
