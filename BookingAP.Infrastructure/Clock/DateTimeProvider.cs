@@ -2,7 +2,7 @@
 
 namespace BookingAP.Infrastructure.Clock
 {
-    public sealed class DateTimeProvider : IDateTimeProvider
+    internal sealed class DateTimeProvider : IDateTimeProvider
     {
         public DateTime UTCNow => DateTime.UtcNow;
     }
