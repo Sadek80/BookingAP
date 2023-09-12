@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookingAP.Infrastructure.Repositories
 {
-    internal sealed class Repository<T> : IRepository<T> where T : Entity
+    internal class Repository<T> : IRepository<T> where T : Entity
     {
         private readonly ApplicationDbContext _dbContext;
 
