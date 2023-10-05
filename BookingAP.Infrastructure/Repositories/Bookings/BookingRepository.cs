@@ -1,12 +1,7 @@
-﻿using BookingAP.Application.Abstractions.Repositories.Bookings;
-using BookingAP.Domain.Appartments;
+﻿using BookingAP.Domain.Appartments;
 using BookingAP.Domain.Bookings;
+using BookingAP.Domain.Bookings.Repositories;
 using BookingAP.Domain.Bookings.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookingAP.Infrastructure.Repositories.Bookings
 {
