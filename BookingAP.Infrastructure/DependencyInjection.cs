@@ -1,6 +1,7 @@
 ﻿using Bookify.Infrastructure.Data;
 using BookingAP.Application.Abstractions.Clock;
 using BookingAP.Application.Abstractions.Data;
+using BookingAP.Application.Abstractions.Scheduling;
 using BookingAP.Application.Abstractions.Services;
 using BookingAP.Domain.Abstractions;
 using BookingAP.Domain.Appartments.Repositories;
@@ -13,11 +14,15 @@ using BookingAP.Infrastructure.Repositories.Appartments;
 using BookingAP.Infrastructure.Repositories.Bookings;
 using BookingAP.Infrastructure.Repositories.Reviews;
 using BookingAP.Infrastructure.Repositories.Users;
+using BookingAP.Infrastructure.Scheduling;
 using BookingAP.Infrastructure.Services;
 using Dapper;
+using Hangfire;
+using Hangfire.MySql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MySql.Data.MySqlClient;
 using MySql.EntityFrameworkCore.Extensions;
 
 namespace BookingAP.Infrastructure
@@ -62,6 +67,43 @@ namespace BookingAP.Infrastructure
 
             SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());
 
+            return services;
+        }
+
+        /// <summary>
+        /// Add Hangifire
+        /// </summary>
+        /// <param name="services">IServiceCollection to Extend</param>
+        /// <returns>Extended IServiceCollection</returns>
+        public static IServiceCollection AddHangifireExtension(this IServiceCollection services,
+                                                               IConfiguration configuration)
+        {
+            var connectionString = configuration.GetConnectionString("Database") ??
+                                  throw new ArgumentNullException("Database Connection String is Null");
+
+            services.AddHangfire(configurations =>
+            {
+                configurations.UseSimpleAssemblyNameTypeSerializer()
+                              .UseRecommendedSerializerSettings()
+                              .UseStorage(
+                                new MySqlStorage(
+                                    connectionString,
+                                    new MySqlStorageOptions
+                                    {
+                                        QueuePollInterval = TimeSpan.Zero,
+                                        JobExpirationCheckInterval = TimeSpan.FromMinutes(30),
+                                        CountersAggregateInterval = TimeSpan.FromMinutes(5),
+                                        PrepareSchemaIfNecessary = true,
+                                        DashboardJobListLimit = 10000,
+                                        TransactionTimeout = TimeSpan.FromMinutes(1),
+                                        TablesPrefix = "Hangfire",
+                                    }
+                                ));
+            });
+
+            services.AddHangfireServer();
+
+            services.AddTransient<IBackgroundJobService, BackgroundJobService>();
             return services;
         }
     }
