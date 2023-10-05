@@ -1,4 +1,4 @@
-﻿using BookingAP.Application.Abstractions.Repositories;
+﻿using BookingAP.Domain.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookingAP.Infrastructure

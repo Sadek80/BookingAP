@@ -1,5 +1,5 @@
 ﻿using BookingAP.Application.Abstractions.Messaging;
-using BookingAP.Application.Abstractions.Repositories.Bookings;
+using BookingAP.Domain.Bookings.Repositories;
 using ErrorOr;
 
 namespace Bookify.Application.Bookings.GetBooking;

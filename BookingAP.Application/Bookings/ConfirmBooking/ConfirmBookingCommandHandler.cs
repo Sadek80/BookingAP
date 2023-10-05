@@ -1,8 +1,7 @@
 ﻿using BookingAP.Application.Abstractions.Clock;
 using BookingAP.Application.Abstractions.Messaging;
-using BookingAP.Application.Abstractions.Repositories;
-using BookingAP.Application.Abstractions.Repositories.Bookings;
 using BookingAP.Domain.Abstractions;
+using BookingAP.Domain.Bookings.Repositories;
 using ErrorOr;
 using static BookingAP.Domain.Bookings.DomainErrors;
 
