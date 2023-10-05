@@ -1,7 +1,20 @@
-﻿using BookingAP.Application.Abstractions.Clock;
+﻿using Bookify.Infrastructure.Data;
+using BookingAP.Application.Abstractions.Clock;
+using BookingAP.Application.Abstractions.Data;
 using BookingAP.Application.Abstractions.Services;
+using BookingAP.Domain.Abstractions;
+using BookingAP.Domain.Appartments.Repositories;
+using BookingAP.Domain.Bookings.Repositories;
+using BookingAP.Domain.Reviews.Repositories;
+using BookingAP.Domain.Users.Repositories;
 using BookingAP.Infrastructure.Clock;
+using BookingAP.Infrastructure.Data;
+using BookingAP.Infrastructure.Repositories.Appartments;
+using BookingAP.Infrastructure.Repositories.Bookings;
+using BookingAP.Infrastructure.Repositories.Reviews;
+using BookingAP.Infrastructure.Repositories.Users;
 using BookingAP.Infrastructure.Services;
+using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,12 +40,27 @@ namespace BookingAP.Infrastructure
                                  mySqlOptionsAction: sqlOptions =>
                                  {
                                      sqlOptions.EnableRetryOnFailure(maxRetryCount: 10,
-                                                                     maxRetryDelay: TimeSpan.FromSeconds(30),
-                                                                     errorNumbersToAdd: null);
+                                     maxRetryDelay: TimeSpan.FromSeconds(30),
+                                     errorNumbersToAdd: null);
                                  });
 
                 options.UseInternalServiceProvider(serviceProvider);
             });
+
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<IAppartmentRepository, AppartmentRepository>();
+
+            services.AddScoped<IBookingRepository, BookingRepository>();
+
+            services.AddScoped<IReviewRepository, ReviewRepository>();
+
+            services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
+
+            services.AddSingleton<ISqlConnectionFactory>(_ =>
+                                new SqlConnectionFactory(connectionString));
+
+            SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());
 
             return services;
         }
