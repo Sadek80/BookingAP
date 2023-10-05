@@ -104,6 +104,8 @@ namespace BookingAP.Infrastructure
             services.AddHangfireServer();
 
             services.AddTransient<IBackgroundJobService, BackgroundJobService>();
+            services.AddTransient<ProcessCoreEventJob>();
+
             return services;
         }
     }
