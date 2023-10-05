@@ -38,6 +38,8 @@ namespace BookingAP.Infrastructure.Configurations
                 cleaningFeeBuilder.Property(s => s.Currency)
                                   .HasConversion(c => c.Code, code => Currency.FromCode(code));
             });
+
+            builder.Property<uint>("Version").IsRowVersion();
         }
     }
 }
