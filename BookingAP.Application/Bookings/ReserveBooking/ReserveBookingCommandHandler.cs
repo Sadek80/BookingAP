@@ -6,6 +6,7 @@ using BookingAP.Domain.Bookings;
 using BookingAP.Domain.Bookings.Repositories;
 using BookingAP.Domain.Bookings.Services;
 using BookingAP.Domain.Bookings.ValueObjects;
+using BookingAP.Domain.Exceptions;
 using BookingAP.Domain.Users.Repositories;
 using ErrorOr;
 using static BookingAP.Domain.Appartments.DomainErrors;
@@ -58,20 +59,27 @@ namespace BookingAP.Application.Bookings.ReserveBooking
 
             if (await _bookingRepository.IsOverlappingAsync(appartment, duration, cancellationToken))
             {
-                return DomainError.NotFound(BookingErrors.Overlap);
+                return DomainError.Conflict(BookingErrors.Overlap);
             }
 
-            var booking = Booking.Reserve(request.userId,
-                                          appartment,
-                                          duration,
-                                          _bookingPricingService,
-                                          _dateTimeProvider.UTCNow);
+            try
+            {
+                var booking = Booking.Reserve(request.userId,
+                                         appartment,
+                                         duration,
+                                         _bookingPricingService,
+                                         _dateTimeProvider.UTCNow);
 
-            _bookingRepository.Add(booking);
+                _bookingRepository.Add(booking);
 
-            await _unitOfWork.SaveChangesAsync();
+                await _unitOfWork.SaveChangesAsync();
 
-            return booking.Id;
+                return booking.Id;
+            }
+            catch (ConcurrencyException)
+            {
+                return DomainError.Conflict(BookingErrors.Overlap);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BookingAP.Domain.Abstractions;
+using BookingAP.Domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookingAP.Infrastructure
@@ -14,6 +15,18 @@ namespace BookingAP.Infrastructure
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return base.SaveChangesAsync(cancellationToken);
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                throw new ConcurrencyException("Try Again Later.", ex);
+            }
         }
     }
 }
