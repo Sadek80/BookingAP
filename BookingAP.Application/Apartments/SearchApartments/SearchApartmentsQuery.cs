@@ -1,7 +1,8 @@
-﻿using BookingAP.Application.Abstractions.Messaging;
+﻿using Bookify.Application.Apartments.SearchApartments;
+using BookingAP.Application.Abstractions.Messaging;
 using ErrorOr;
 
-namespace Bookify.Application.Apartments.SearchApartments;
+namespace BookingAP.Application.Apartments.SearchApartments;
 
 public sealed record SearchApartmentsQuery(DateOnly StartDate,
                                            DateOnly EndDate) : IQuery<ErrorOr<IReadOnlyList<ApartmentResponse>>>;

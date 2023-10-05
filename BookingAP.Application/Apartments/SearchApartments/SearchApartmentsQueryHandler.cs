@@ -1,5 +1,6 @@
 ﻿using BookingAP.Application.Abstractions.Data;
 using BookingAP.Application.Abstractions.Messaging;
+using BookingAP.Application.Apartments.SearchApartments;
 using BookingAP.Domain.Bookings.Enums;
 using Dapper;
 using ErrorOr;

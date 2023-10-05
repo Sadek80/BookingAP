@@ -8,6 +8,7 @@ using static BookingAP.Domain.Bookings.DomainErrors;
 using BookingAP.Domain.Abstractions;
 using BookingAP.Domain.Bookings.Repositories;
 using BookingAP.Domain.Reviews.Repositories;
+using BookingAP.Application.Reviews.AddReview;
 
 namespace Bookify.Application.Reviews.AddReview;
 
