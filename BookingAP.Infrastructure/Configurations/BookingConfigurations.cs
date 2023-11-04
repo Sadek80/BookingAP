@@ -15,11 +15,11 @@ namespace BookingAP.Infrastructure.Configurations
 
             builder.HasKey(k => k.Id);
 
-            builder.Property(p => p.Duration);
-
             builder.Property(p => p.CreatedOnUTC);
 
             builder.Property(p => p.Status);
+
+            builder.OwnsOne(p => p.Duration);
 
             builder.OwnsOne(p => p.PriceForPeriod, priceForPeriodBuilder =>
             {
