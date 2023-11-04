@@ -1,5 +1,5 @@
 ﻿using BookingAP.Application.Abstractions.Data;
-using MySql.Data.MySqlClient;
+using Npgsql;
 using System.Data;
 
 namespace BookingAP.Infrastructure.Data
@@ -15,7 +15,7 @@ namespace BookingAP.Infrastructure.Data
 
         public IDbConnection CreateConnection()
         {
-            var connection = new MySqlConnection(_connectionString);
+            var connection = new NpgsqlConnection(_connectionString);
             connection.Open();
 
             return connection;

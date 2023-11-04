@@ -18,12 +18,10 @@ using BookingAP.Infrastructure.Scheduling;
 using BookingAP.Infrastructure.Services;
 using Dapper;
 using Hangfire;
-using Hangfire.MySql;
+using Hangfire.PostgreSql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MySql.Data.MySqlClient;
-using MySql.EntityFrameworkCore.Extensions;
 
 namespace BookingAP.Infrastructure
 {
@@ -37,17 +35,16 @@ namespace BookingAP.Infrastructure
             var connectionString = configuration.GetConnectionString("Database") ?? 
                                    throw new ArgumentNullException("Database Connection String is Null");
 
-            services.AddEntityFrameworkMySQL();
+            services.AddEntityFrameworkNpgsql();
 
             services.AddDbContextPool<ApplicationDbContext>((serviceProvider, options) =>
             {
-                options.UseMySQL(connectionString,
-                                 mySqlOptionsAction: sqlOptions =>
-                                 {
-                                     sqlOptions.EnableRetryOnFailure(maxRetryCount: 10,
-                                     maxRetryDelay: TimeSpan.FromSeconds(30),
-                                     errorNumbersToAdd: null);
-                                 });
+                options.UseNpgsql(connectionString, npgsqlOptionsAction: options =>
+                {
+                    options.EnableRetryOnFailure(maxRetryCount: 10,
+                                                 maxRetryDelay: TimeSpan.FromSeconds(30),
+                                                 errorCodesToAdd: null);           
+                });
 
                 options.UseInternalServiceProvider(serviceProvider);
             });
@@ -85,20 +82,7 @@ namespace BookingAP.Infrastructure
             {
                 configurations.UseSimpleAssemblyNameTypeSerializer()
                               .UseRecommendedSerializerSettings()
-                              .UseStorage(
-                                new MySqlStorage(
-                                    connectionString,
-                                    new MySqlStorageOptions
-                                    {
-                                        QueuePollInterval = TimeSpan.Zero,
-                                        JobExpirationCheckInterval = TimeSpan.FromMinutes(30),
-                                        CountersAggregateInterval = TimeSpan.FromMinutes(5),
-                                        PrepareSchemaIfNecessary = true,
-                                        DashboardJobListLimit = 10000,
-                                        TransactionTimeout = TimeSpan.FromMinutes(1),
-                                        TablesPrefix = "Hangfire",
-                                    }
-                                ));
+                              .UsePostgreSqlStorage(c => c.UseNpgsqlConnection(connectionString));
             });
 
             services.AddHangfireServer();
