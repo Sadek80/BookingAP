@@ -43,7 +43,7 @@ namespace BookingAP.Infrastructure
                 {
                     options.EnableRetryOnFailure(maxRetryCount: 10,
                                                  maxRetryDelay: TimeSpan.FromSeconds(30),
-                                                 errorCodesToAdd: null);           
+                                                 errorCodesToAdd: null);  
                 });
 
                 options.UseInternalServiceProvider(serviceProvider);
