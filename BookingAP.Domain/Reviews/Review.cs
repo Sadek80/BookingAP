@@ -26,6 +26,9 @@ namespace BookingAP.Domain.Reviews
             CreatedOnUTC = createdOnUTC;
         }
 
+        private Review()
+        {
+        }
         public Guid UserId { get; private set; }
         public Guid AppartmentId { get; private set; }
         public Guid BookingId { get; private set; }

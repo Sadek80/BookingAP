@@ -26,6 +26,10 @@ namespace BookingAP.Domain.Appartments
             LastBookedOnUTC = lastBookedOnUTC;
         }
 
+        private Appartment()
+        {
+        }
+
         public Name Name { get; private set; }
         public Address Address { get; private set; }
         public Description Description { get; private set; }
