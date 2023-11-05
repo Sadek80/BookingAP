@@ -1,6 +1,8 @@
 ﻿using BookingAP.Application.Abstractions.Behaviors;
+using BookingAP.Application.Abstractions.Messaging;
 using BookingAP.Domain.Bookings.Services;
 using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BookingAP.Application
@@ -17,6 +19,13 @@ namespace BookingAP.Application
 
                 configuration.AddOpenBehavior(typeof(ValidationPipelineBehavior<,>));
             });
+
+
+            services.AddSingleton(typeof(IMessagingPipelineBehavior<,>),
+                                  typeof(ValidationPipelineBehavior<,>));
+
+            services.AddSingleton(typeof(IMessagingPipelineBehavior<,>),
+                                  typeof(LoggingPipelineBehavior<,>));
 
             services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
 

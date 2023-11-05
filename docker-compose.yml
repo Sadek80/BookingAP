@@ -22,3 +22,12 @@ services:
     ports:
       - 5432:5432
 
+  bookinap.seq:
+    image: datalust/seq:latest
+    container_name: Bookinap-seq
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - 5342:5342
+      - 8081:80
+

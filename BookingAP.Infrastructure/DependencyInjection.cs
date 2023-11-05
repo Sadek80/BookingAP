@@ -22,6 +22,9 @@ using Hangfire.PostgreSql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Serilog;
+using System.Configuration;
 
 namespace BookingAP.Infrastructure
 {
@@ -89,6 +92,24 @@ namespace BookingAP.Infrastructure
 
             services.AddTransient<IBackgroundJobService, BackgroundJobService>();
             services.AddTransient<ProcessCoreEventJob>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Add Serilog Logging with SEQ
+        /// </summary>
+        /// <param name="services">IServiceCollection to Extend</param>
+        /// <param name="hostBuilder">Host Builder</param>
+        /// <param name="configuration">Configuration</param>
+        /// <returns></returns>
+        public static IServiceCollection AddLogging(this IServiceCollection services, IHostBuilder hostBuilder, IConfiguration configuration)
+        {
+            hostBuilder.UseSerilog((context, config) =>
+            {
+                config
+                .ReadFrom.Configuration(configuration);
+            });
 
             return services;
         }

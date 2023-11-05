@@ -1,4 +1,3 @@
-using BookingAp.API.Extensions;
 using BookingAP.Application;
 using BookingAP.Infrastructure;
 
@@ -8,6 +7,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddApplication()
                 .AddInfrastructure(builder.Configuration)
+                .AddLogging(builder.Host, builder.Configuration)
                 .AddHangifireExtension(configuration: builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();

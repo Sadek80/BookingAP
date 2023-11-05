@@ -1,12 +1,11 @@
-﻿using BookingAP.Application.Abstractions.Messaging;
-using ErrorOr;
+﻿using ErrorOr;
 using MediatR;
 using Serilog;
 
 namespace BookingAP.Application.Abstractions.Behaviors
 {
     public class LoggingPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : ICommand<TResponse>
+        where TRequest : notnull
         where TResponse: IErrorOr
     {
         private readonly ILogger _logger;
