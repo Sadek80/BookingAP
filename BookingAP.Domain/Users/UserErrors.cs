@@ -7,7 +7,7 @@ namespace BookingAP.Domain.Users
         public static class UserErrors
         {
             public static DomainError NotFound = new(
-               "User.Found",
+               "User.NotFound",
                "The user with the specified identifier was not found");
 
             public static DomainError InvalidCredentials = new(

@@ -7,7 +7,7 @@ namespace BookingAP.Domain.Appartments
         public static class AppartmentErrors
         {
             public static DomainError NotFound = new(
-              "Appartment.Found",
+              "Appartment.NotFound",
               "The appartment with the specified identifier was not found");
         }
     }

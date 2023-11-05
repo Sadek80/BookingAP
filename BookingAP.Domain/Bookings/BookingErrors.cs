@@ -7,7 +7,7 @@ namespace BookingAP.Domain.Bookings
         public static class BookingErrors
         {
             public static DomainError NotFound = new(
-               "Booking.Found",
+               "Booking.NotFound",
                "The booking with the specified identifier was not found");
 
             public static DomainError Overlap = new(
