@@ -25,6 +25,12 @@ namespace BookingAP.Application.Abstractions.Behaviors
 
                 var result = await next();
 
+                if (result.IsError)
+                {
+                    _logger.Error("{Errors}", result.Errors);
+                    return result;
+                }
+
                 _logger.Information("Command {Command} processed successfully", name);
 
                 return result;
