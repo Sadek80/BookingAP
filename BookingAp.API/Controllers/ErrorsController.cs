@@ -12,7 +12,7 @@ namespace BookingAp.API.Controllers
         public IActionResult Error()
         {
             Exception? exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
-            return Problem(statusCode: 500, title: exception?.Message);
+            return Problem(statusCode: 500, title: "Server Error");
         }
     }
 }
