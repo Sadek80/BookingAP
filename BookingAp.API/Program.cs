@@ -8,6 +8,7 @@ builder.Services.AddControllers();
 builder.Services.AddApplication()
                 .AddInfrastructure(builder.Configuration)
                 .AddLogging(builder.Host, builder.Configuration)
+                .AddMapper()
                 .AddHangifireExtension(configuration: builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();

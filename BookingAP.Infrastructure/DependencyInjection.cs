@@ -25,6 +25,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using System.Configuration;
+using System.Reflection;
 
 namespace BookingAP.Infrastructure
 {
@@ -111,6 +112,12 @@ namespace BookingAP.Infrastructure
                 .ReadFrom.Configuration(configuration);
             });
 
+            return services;
+        }
+
+        public static IServiceCollection AddMapper(this IServiceCollection services)
+        {
+            services.AddAutoMapper(typeof(DependencyInjection).Assembly);
             return services;
         }
     }
