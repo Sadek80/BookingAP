@@ -1,5 +1,4 @@
-﻿using BookingAP.Application.Abstractions.Repositories;
-using BookingAP.Domain.Abstractions;
+﻿using BookingAP.Domain.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookingAP.Infrastructure.Repositories
@@ -20,13 +19,14 @@ namespace BookingAP.Infrastructure.Repositories
 
         public async Task<T> AddAsync(T entity, CancellationToken cancellationToken = default)
         {
-            await _dbContext.Set<T>().AddAsync(entity, cancellationToken);
-            return entity;
+            var entityAdded = await _dbContext.Set<T>().AddAsync(entity, cancellationToken);
+
+            return entityAdded.Entity;
         }
 
         public async Task<T?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            return await  _dbContext.Set<T>().FirstOrDefaultAsync(f => f.Id == id);
+            return await _dbContext.Set<T>().FirstOrDefaultAsync(f => f.Id == id, cancellationToken);
         }
     }
 }

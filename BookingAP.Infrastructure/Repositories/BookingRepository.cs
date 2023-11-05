@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using BookingAP.Application.Abstractions.Repositories.Bookings;
 using BookingAP.Domain.Appartments;
 using BookingAP.Domain.Bookings;
 using BookingAP.Domain.Bookings.Enums;
+using BookingAP.Domain.Bookings.Repositories;
 using BookingAP.Domain.Bookings.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 

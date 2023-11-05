@@ -1,8 +1,8 @@
-﻿using BookingAP.Domain.Appartments;
-using BookingAP.Domain.Bookings;
+﻿using BookingAP.Domain.Abstractions;
+using BookingAP.Domain.Appartments;
 using BookingAP.Domain.Bookings.ValueObjects;
 
-namespace BookingAP.Application.Abstractions.Repositories.Bookings
+namespace BookingAP.Domain.Bookings.Repositories
 {
     public interface IBookingRepository : IRepository<Booking>
     {

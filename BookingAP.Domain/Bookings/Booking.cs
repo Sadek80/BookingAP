@@ -33,6 +33,10 @@ namespace BookingAP.Domain.Bookings
             CreatedOnUTC = createdOnUTC;
         }
 
+        private Booking()
+        {
+        }
+
         public Guid UserId { get; private set; }
         public Guid AppartmentId { get; private set; }
         public DateRange Duration { get; private set; }

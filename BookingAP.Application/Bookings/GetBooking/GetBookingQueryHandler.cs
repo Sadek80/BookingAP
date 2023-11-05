@@ -1,6 +1,7 @@
 ﻿using BookingAP.Application.Abstractions.Messaging;
-using BookingAP.Application.Abstractions.Repositories.Bookings;
+using BookingAP.Application.Bookings.GetBooking;
 using BookingAP.Domain.Abstractions;
+using BookingAP.Domain.Bookings.Repositories;
 using ErrorOr;
 using static BookingAP.Domain.Bookings.DomainErrors;
 

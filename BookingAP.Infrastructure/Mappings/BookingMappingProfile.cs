@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Bookify.Application.Bookings.GetBooking;
+using BookingAP.Application.Bookings.GetBooking;
 using BookingAP.Domain.Bookings;
 
 namespace BookingAP.Infrastructure.Mappings

@@ -1,16 +1,14 @@
 ﻿using BookingAP.Application.Abstractions.Clock;
 using BookingAP.Application.Abstractions.Messaging;
-using BookingAP.Application.Abstractions.Repositories;
-using BookingAP.Application.Abstractions.Repositories.Bookings;
-using BookingAP.Application.Abstractions.Repositories.Reviews;
 using BookingAP.Domain.Bookings;
 using BookingAP.Domain.Reviews.ValueObjects;
 using BookingAP.Domain.Reviews;
 using ErrorOr;
 using static BookingAP.Domain.Bookings.DomainErrors;
 using BookingAP.Domain.Abstractions;
-using System.Net.Http.Headers;
-using static BookingAP.Domain.Reviews.ValueObjects.DomainErrors;
+using BookingAP.Domain.Bookings.Repositories;
+using BookingAP.Domain.Reviews.Repositories;
+using BookingAP.Application.Reviews.AddReview;
 
 namespace Bookify.Application.Reviews.AddReview;
 
