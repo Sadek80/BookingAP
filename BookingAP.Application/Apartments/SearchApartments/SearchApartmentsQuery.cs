@@ -1,4 +1,4 @@
-﻿using Bookify.Application.Apartments.SearchApartments;
+﻿using BookingAp.Contract.Appartments;
 using BookingAP.Application.Abstractions.Messaging;
 using ErrorOr;
 

@@ -1,4 +1,4 @@
-﻿namespace BookingAP.Application.Bookings.GetBooking
+﻿namespace BookingAp.Contract.Bookings
 {
     public sealed class BookingResponse
     {
@@ -6,9 +6,9 @@
 
         public Guid UserId { get; init; }
 
-    public Guid ApartmentId { get; init; }
-    
-    public string Status { get; init; }
+        public Guid ApartmentId { get; init; }
+
+        public string Status { get; init; }
 
         public decimal PriceAmount { get; init; }
 

@@ -1,4 +1,4 @@
-﻿namespace Bookify.Application.Apartments.SearchApartments;
+﻿namespace BookingAp.Contract.Appartments;
 
 public sealed class ApartmentResponse
 {

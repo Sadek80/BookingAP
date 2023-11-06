@@ -1,4 +1,5 @@
-﻿using BookingAP.Application.Abstractions.Messaging;
+﻿using BookingAp.Contract.Bookings;
+using BookingAP.Application.Abstractions.Messaging;
 using ErrorOr;
 
 namespace BookingAP.Application.Bookings.GetBooking

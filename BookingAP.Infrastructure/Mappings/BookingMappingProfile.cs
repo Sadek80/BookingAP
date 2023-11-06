@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BookingAP.Application.Bookings.GetBooking;
+using BookingAp.Contract.Bookings;
 using BookingAP.Domain.Bookings;
 
 namespace BookingAP.Infrastructure.Mappings

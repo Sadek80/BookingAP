@@ -1,4 +1,5 @@
-﻿using BookingAP.Application.Abstractions.Messaging;
+﻿using BookingAp.Contract.Bookings;
+using BookingAP.Application.Abstractions.Messaging;
 using BookingAP.Application.Bookings.GetBooking;
 using BookingAP.Domain.Abstractions;
 using BookingAP.Domain.Bookings.Repositories;
