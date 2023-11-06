@@ -10,6 +10,7 @@ using BookingAP.Domain.Bookings.Repositories;
 using BookingAP.Domain.Reviews.Repositories;
 using BookingAP.Domain.Users.Repositories;
 using BookingAP.Infrastructure.Authentication;
+using BookingAP.Infrastructure.Authentication.Options;
 using BookingAP.Infrastructure.Clock;
 using BookingAP.Infrastructure.Data;
 using BookingAP.Infrastructure.Data.Helpers;

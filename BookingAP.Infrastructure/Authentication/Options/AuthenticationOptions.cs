@@ -1,4 +1,4 @@
-﻿namespace BookingAP.Infrastructure.Authentication;
+﻿namespace BookingAP.Infrastructure.Authentication.Options;
 
 public sealed class AuthenticationOptions
 {

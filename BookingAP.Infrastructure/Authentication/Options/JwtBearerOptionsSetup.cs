@@ -1,8 +1,7 @@
-﻿using BookingAP.Infrastructure.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 
-namespace Bookify.Infrastructure.Authentication;
+namespace BookingAP.Infrastructure.Authentication.Options;
 
 internal sealed class JwtBearerOptionsSetup : IConfigureNamedOptions<JwtBearerOptions>
 {

@@ -2,6 +2,7 @@
 using BookingAP.Application.Abstractions.Authentication;
 using BookingAP.Domain.Abstractions;
 using BookingAP.Infrastructure.Authentication.Models;
+using BookingAP.Infrastructure.Authentication.Options;
 using ErrorOr;
 using Microsoft.Extensions.Options;
 using static BookingAP.Domain.Users.DomainErrors;
