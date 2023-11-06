@@ -25,7 +25,10 @@ namespace BookingAP.Infrastructure.Configurations
                 .HasMaxLength(400)
                 .HasConversion(email => email.Value, value => new Email(value));
 
+            builder.Property(user => user.IdentityId);
+
             builder.HasIndex(user => user.Email).IsUnique();
+            builder.HasIndex(user => user.IdentityId).IsUnique();
         }
     }
 }
