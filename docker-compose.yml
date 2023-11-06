@@ -30,4 +30,17 @@ services:
     ports:
       - 5342:5342
       - 8081:80
+  
+  bookingap-idp:
+    image: jboss/keycloak:latest
+    container_name: BookingAp.Identity
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+      - KEYCLOAK_IMPORT=/tmp/BookingAp-realm-export.json
+    volumes:
+      - ./.containers/identity:/opt/jboss/keycloak/standalone/data
+      - ./.files/BookingAp-realm-export.json:/tmp/BookingAp-realm-export.json
+    ports:
+      - 18080:8080
 
