@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using System.Data;
 
-namespace Bookify.Infrastructure.Data
+namespace BookingAP.Infrastructure.Data.Helpers
 {
     internal sealed class DateOnlyTypeHandler : SqlMapper.TypeHandler<DateOnly>
     {

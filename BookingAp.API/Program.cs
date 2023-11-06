@@ -6,10 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddApplication()
-                .AddInfrastructure(builder.Configuration)
-                .AddLogging(builder.Host, builder.Configuration)
-                .AddMapper()
-                .AddHangifireExtension(configuration: builder.Configuration);
+                .AddInfrastructure(builder.Host, builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -28,6 +25,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();
