@@ -11,8 +11,12 @@ namespace BookingAP.Domain.Users
                "The user with the specified identifier was not found");
 
             public static DomainError InvalidCredentials = new(
-                "User.InvalidCredentials",
-                "The provided credentials were invalid");
+               "User.InvalidCredentials",
+               "Invalid Credentials.");
+
+            public static DomainError AuthenticationFailed = new(
+               "User.AuthenticationFailed",
+               "Failed to Authenticate User.");
         }
     }
 }
