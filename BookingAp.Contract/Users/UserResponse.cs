@@ -1,4 +1,4 @@
-﻿namespace BookingAP.Application.Users.GetLoggedInUser;
+﻿namespace BookingAp.Contract.Users;
 
 public sealed class UserResponse
 {

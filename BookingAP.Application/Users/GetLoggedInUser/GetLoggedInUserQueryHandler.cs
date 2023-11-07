@@ -1,4 +1,5 @@
-﻿using BookingAP.Application.Abstractions.Authentication;
+﻿using BookingAp.Contract.Users;
+using BookingAP.Application.Abstractions.Authentication;
 using BookingAP.Application.Abstractions.Data;
 using BookingAP.Application.Abstractions.Messaging;
 using Dapper;

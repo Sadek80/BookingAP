@@ -1,4 +1,5 @@
-﻿using BookingAP.Application.Abstractions.Authentication;
+﻿using BookingAp.Contract.Users;
+using BookingAP.Application.Abstractions.Authentication;
 using BookingAP.Application.Abstractions.Messaging;
 using BookingAP.Domain.Abstractions;
 using BookingAP.Domain.Users;
@@ -8,7 +9,7 @@ using ErrorOr;
 
 namespace BookingAP.Application.Users.RegisterUser;
 
-internal sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand, ErrorOr<Guid>>
+internal sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand, ErrorOr<RegisterUserResponse>>
 {
     private readonly IAuthenticationService _authenticationService;
     private readonly IUserRepository _userRepository;
@@ -24,7 +25,7 @@ internal sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserC
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ErrorOr<Guid>> Handle(
+    public async Task<ErrorOr<RegisterUserResponse>> Handle(
         RegisterUserCommand request,
         CancellationToken cancellationToken)
     {
@@ -44,6 +45,6 @@ internal sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserC
 
         await _unitOfWork.SaveChangesAsync();
 
-        return user.Id;
+        return new RegisterUserResponse(user.Id);
     }
 }

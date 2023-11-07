@@ -1,4 +1,5 @@
-﻿using BookingAP.Application.Abstractions.Messaging;
+﻿using BookingAp.Contract.Users;
+using BookingAP.Application.Abstractions.Messaging;
 using ErrorOr;
 
 namespace BookingAP.Application.Users.RegisterUser;
@@ -7,4 +8,4 @@ public sealed record RegisterUserCommand(
         string Email,
         string FirstName,
         string LastName,
-        string Password) : ICommand<ErrorOr<Guid>>;
+        string Password) : ICommand<ErrorOr<RegisterUserResponse>>;

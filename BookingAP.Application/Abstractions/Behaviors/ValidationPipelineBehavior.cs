@@ -5,7 +5,7 @@ using MediatR;
 
 namespace BookingAP.Application.Abstractions.Behaviors
 {
-    public class ValidationPipelineBehavior<TRequest, TResponse> : IMessagingPipelineBehavior<TRequest, TResponse>
+    public class ValidationPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : notnull
     where TResponse : IErrorOr
     {

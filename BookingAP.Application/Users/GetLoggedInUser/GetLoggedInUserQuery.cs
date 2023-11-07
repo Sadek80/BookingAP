@@ -1,4 +1,5 @@
-﻿using BookingAP.Application.Abstractions.Messaging;
+﻿using BookingAp.Contract.Users;
+using BookingAP.Application.Abstractions.Messaging;
 using ErrorOr;
 
 namespace BookingAP.Application.Users.GetLoggedInUser;

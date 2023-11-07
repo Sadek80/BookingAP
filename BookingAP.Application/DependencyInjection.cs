@@ -20,13 +20,6 @@ namespace BookingAP.Application
                 configuration.AddOpenBehavior(typeof(ValidationPipelineBehavior<,>));
             });
 
-
-            services.AddSingleton(typeof(IMessagingPipelineBehavior<,>),
-                                  typeof(ValidationPipelineBehavior<,>));
-
-            services.AddSingleton(typeof(IMessagingPipelineBehavior<,>),
-                                  typeof(LoggingPipelineBehavior<,>));
-
             services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
 
             services.AddTransient<BookingPricingService>();

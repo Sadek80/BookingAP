@@ -1,3 +1,4 @@
+using BookingAp.API.Extensions;
 using BookingAP.Application;
 using BookingAP.Infrastructure;
 
