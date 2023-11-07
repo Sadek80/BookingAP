@@ -1,6 +1,6 @@
 {
   "id": "BookingAp",
-  "realm": "BookingAp",
+  "realm": "bookingap",
   "notBefore": 0,
   "defaultSignatureAlgorithm": "RS256",
   "revokeRefreshToken": false,
@@ -56,7 +56,7 @@
       },
       {
         "id": "5210598a-1bd0-459d-91a0-a720e9933ad6",
-        "name": "default-roles-BookingAp",
+        "name": "default-roles-bookingap",
         "description": "${role_default-roles}",
         "composite": true,
         "composites": {
@@ -299,9 +299,9 @@
         }
       ],
       "security-admin-console": [],
-      "BookingAp-auth-client": [],
+      "bookingap-auth-client": [],
       "admin-cli": [],
-      "BookingAp-admin-client": [],
+      "bookingap-admin-client": [],
       "account-console": [],
       "broker": [
         {
@@ -398,7 +398,7 @@
   "groups": [],
   "defaultRole": {
     "id": "5210598a-1bd0-459d-91a0-a720e9933ad6",
-    "name": "default-roles-BookingAp",
+    "name": "default-roles-bookingap",
     "description": "${role_default-roles}",
     "composite": true,
     "clientRole": false,
@@ -445,15 +445,15 @@
     {
       "id": "3538994f-b095-45f6-8f98-a95dd61b84c1",
       "createdTimestamp": 1689227091368,
-      "username": "service-account-BookingAp-admin-client",
+      "username": "service-account-bookingap-admin-client",
       "enabled": true,
       "totp": false,
       "emailVerified": false,
-      "serviceAccountClientId": "BookingAp-admin-client",
+      "serviceAccountClientId": "bookingap-admin-client",
       "disableableCredentialTypes": [],
       "requiredActions": [],
       "realmRoles": [
-        "default-roles-BookingAp"
+        "default-roles-bookingap"
       ],
       "clientRoles": {
         "realm-management": [
@@ -488,13 +488,13 @@
       "clientId": "account",
       "name": "${client_account}",
       "rootUrl": "${authBaseUrl}",
-      "baseUrl": "/realms/BookingAp/account/",
+      "baseUrl": "/realms/bookingap/account/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "/realms/BookingAp/account/*"
+        "/realms/bookingap/account/*"
       ],
       "webOrigins": [],
       "notBefore": 0,
@@ -616,7 +616,7 @@
     },
     {
       "id": "c6bfa492-b859-47b2-96e0-18b0ad6c9b6d",
-      "clientId": "BookingAp-admin-client",
+      "clientId": "bookingap-admin-client",
       "rootUrl": "http://localhost:18080/",
       "adminUrl": "http://localhost:18080/",
       "surrogateAuthRequired": false,
@@ -729,7 +729,7 @@
     },
     {
       "id": "59327369-c4e0-4354-9de4-3194af25fd9d",
-      "clientId": "BookingAp-auth-client",
+      "clientId": "bookingap-auth-client",
       "rootUrl": "http://localhost:18080/",
       "surrogateAuthRequired": false,
       "enabled": true,
@@ -871,13 +871,13 @@
       "clientId": "security-admin-console",
       "name": "${client_security-admin-console}",
       "rootUrl": "${authAdminUrl}",
-      "baseUrl": "/admin/BookingAp/console/",
+      "baseUrl": "/admin/bookingap/console/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "/admin/BookingAp/console/*"
+        "/admin/bookingap/console/*"
       ],
       "webOrigins": [
         "+"
