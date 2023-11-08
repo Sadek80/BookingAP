@@ -1,5 +1,6 @@
 ﻿using BookingAP.Domain.Appartments;
 using BookingAP.Domain.Bookings;
+using BookingAP.Domain.Bookings.ValueObjects;
 using BookingAP.Domain.Shared.ValueObjects;
 using BookingAP.Domain.Users;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,9 @@ namespace BookingAP.Infrastructure.Configurations
             builder.ToTable(nameof(Booking));
 
             builder.HasKey(k => k.Id);
+
+            builder.Property(p => p.Id)
+                   .HasConversion(id => id.Value, value => new BookingId(value));
 
             builder.Property(p => p.CreatedOnUTC);
 

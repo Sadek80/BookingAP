@@ -16,6 +16,9 @@ namespace BookingAP.Infrastructure.Configurations
 
             builder.HasKey(p => p.Id);
 
+            builder.Property(p => p.Id)
+                   .HasConversion(id => id.Value, value => new ReviewId(value));
+
             builder.Property(p => p.Comment)
                    .HasConversion(c => c.Value, value => new Comment(value));
 

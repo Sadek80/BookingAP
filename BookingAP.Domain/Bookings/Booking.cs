@@ -1,19 +1,21 @@
 ﻿using BookingAP.Domain.Abstractions;
 using BookingAP.Domain.Appartments;
+using BookingAP.Domain.Appartments.ValueObjects;
 using BookingAP.Domain.Bookings.Enums;
 using BookingAP.Domain.Bookings.Events;
 using BookingAP.Domain.Bookings.Services;
 using BookingAP.Domain.Bookings.ValueObjects;
 using BookingAP.Domain.Shared.ValueObjects;
+using BookingAP.Domain.Users.ValueObjects;
 using ErrorOr;
 
 namespace BookingAP.Domain.Bookings
 {
-    public sealed class Booking : Entity
+    public sealed class Booking : Entity<BookingId>
     {
-        private Booking(Guid Id,
-                        Guid userId,
-                        Guid appartmentId,
+        private Booking(BookingId Id,
+                        UserId userId,
+                        AppartmentId appartmentId,
                         DateRange duration,
                         Money priceForPeriod,
                         Money cleaningFee,
@@ -37,8 +39,8 @@ namespace BookingAP.Domain.Bookings
         {
         }
 
-        public Guid UserId { get; private set; }
-        public Guid AppartmentId { get; private set; }
+        public UserId UserId { get; private set; }
+        public AppartmentId AppartmentId { get; private set; }
         public DateRange Duration { get; private set; }
         public Money PriceForPeriod { get; private set; }
         public Money CleaningFee { get; private set; }
@@ -51,7 +53,7 @@ namespace BookingAP.Domain.Bookings
         public DateTime? CompletedOnUTC { get; private set; }
         public DateTime? CanceledOnUTC { get; private set; }
 
-        public static Booking Reserve(Guid userId,
+        public static Booking Reserve(UserId userId,
                                      Appartment appartment,
                                      DateRange duration,
                                      BookingPricingService bookingPricingService,
@@ -59,7 +61,7 @@ namespace BookingAP.Domain.Bookings
         {
             var pricingDetails = bookingPricingService.CalculatePrice(appartment, duration);
 
-            var booking = new Booking(Guid.NewGuid(),
+            var booking = new Booking(BookingId.New,
                                       userId,
                                       appartment.Id,
                                       duration,

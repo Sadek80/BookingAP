@@ -29,10 +29,11 @@ internal sealed class GetLoggedInUserQueryHandler
 
         const string sql = """
             SELECT
-                "id" AS Id,
-                "name" AS Name,
-                "email" AS Email
-            FROM "users"
+                "Id" AS Id,
+                "FirstName" AS FirstName,
+                "LastName" AS LastName,
+                "Email" AS Email
+            FROM "User"
             WHERE "IdentityId" = @IdentityId
             """;
 

@@ -9,6 +9,7 @@ using BookingAP.Domain.Abstractions;
 using BookingAP.Domain.Bookings.Repositories;
 using BookingAP.Domain.Reviews.Repositories;
 using BookingAP.Application.Reviews.AddReview;
+using BookingAP.Domain.Bookings.ValueObjects;
 
 namespace Bookify.Application.Reviews.AddReview;
 
@@ -33,7 +34,7 @@ internal sealed class AddReviewCommandHandler : ICommandHandler<AddReviewCommand
 
     public async Task<ErrorOr<Guid>> Handle(AddReviewCommand request, CancellationToken cancellationToken)
     {
-        var booking = await _bookingRepository.GetByIdAsync(request.BookingId, cancellationToken);
+        var booking = await _bookingRepository.GetByIdAsync(new BookingId(request.BookingId), cancellationToken);
 
         if (booking is null)
         {
@@ -61,6 +62,6 @@ internal sealed class AddReviewCommandHandler : ICommandHandler<AddReviewCommand
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return reviewResult.Value.Id;
+        return reviewResult.Value.Id.Value;
     }
 }

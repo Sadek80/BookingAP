@@ -5,9 +5,9 @@ using BookingAP.Domain.Shared.ValueObjects;
 
 namespace BookingAP.Domain.Appartments
 {
-    public sealed class Appartment : Entity
+    public sealed class Appartment : Entity<AppartmentId>
     {
-        public Appartment(Guid Id, 
+        public Appartment(AppartmentId Id, 
                           Name name,
                           Address address,
                           Description description,

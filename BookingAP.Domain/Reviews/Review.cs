@@ -1,18 +1,21 @@
 ﻿using BookingAP.Domain.Abstractions;
+using BookingAP.Domain.Appartments.ValueObjects;
 using BookingAP.Domain.Bookings;
 using BookingAP.Domain.Bookings.Enums;
+using BookingAP.Domain.Bookings.ValueObjects;
 using BookingAP.Domain.Reviews.Events;
 using BookingAP.Domain.Reviews.ValueObjects;
+using BookingAP.Domain.Users.ValueObjects;
 using ErrorOr;
 
 namespace BookingAP.Domain.Reviews
 {
-    public sealed class Review : Entity
+    public sealed class Review : Entity<ReviewId>
     {
-        private Review(Guid Id,
-                      Guid userId,
-                      Guid appartmentId,
-                      Guid bookingId,
+        private Review(ReviewId Id,
+                      UserId userId,
+                      AppartmentId appartmentId,
+                      BookingId bookingId,
                       Comment comment,
                       Rating rating,
                       DateTime createdOnUTC)
@@ -29,9 +32,9 @@ namespace BookingAP.Domain.Reviews
         private Review()
         {
         }
-        public Guid UserId { get; private set; }
-        public Guid AppartmentId { get; private set; }
-        public Guid BookingId { get; private set; }
+        public UserId UserId { get; private set; }
+        public AppartmentId AppartmentId { get; private set; }
+        public BookingId BookingId { get; private set; }
         public Comment Comment { get; private set; }
         public Rating Rating { get; internal set; }
         public DateTime CreatedOnUTC { get; private set; }
@@ -46,7 +49,7 @@ namespace BookingAP.Domain.Reviews
                 return DomainError.Failure(DomainErrors.ReviewErrors.NotEligible);
             }
 
-            var review = new Review(Guid.NewGuid(),
+            var review = new Review(ReviewId.New,
                                     booking.UserId,
                                     booking.AppartmentId,
                                     booking.Id,

@@ -1,9 +1,9 @@
 ﻿namespace BookingAP.Domain.Abstractions
 {
-    public interface IRepository<T> where T : Entity
+    public interface IRepository<TEntity, TEntityId> where TEntity : Entity<TEntityId>
     {
-        Task<T?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
-        void Add(T entity);
-        Task<T> AddAsync(T entity, CancellationToken cancellationToken = default);
+        Task<TEntity?> GetByIdAsync(TEntityId id, CancellationToken cancellationToken = default);
+        void Add(TEntity entity);
+        Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default);
     }
 }

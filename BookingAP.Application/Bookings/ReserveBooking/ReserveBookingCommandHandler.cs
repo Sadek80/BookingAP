@@ -2,12 +2,14 @@
 using BookingAP.Application.Abstractions.Messaging;
 using BookingAP.Domain.Abstractions;
 using BookingAP.Domain.Appartments.Repositories;
+using BookingAP.Domain.Appartments.ValueObjects;
 using BookingAP.Domain.Bookings;
 using BookingAP.Domain.Bookings.Repositories;
 using BookingAP.Domain.Bookings.Services;
 using BookingAP.Domain.Bookings.ValueObjects;
 using BookingAP.Domain.Exceptions;
 using BookingAP.Domain.Users.Repositories;
+using BookingAP.Domain.Users.ValueObjects;
 using ErrorOr;
 using static BookingAP.Domain.Appartments.DomainErrors;
 using static BookingAP.Domain.Bookings.DomainErrors;
@@ -15,7 +17,7 @@ using static BookingAP.Domain.Users.DomainErrors;
 
 namespace BookingAP.Application.Bookings.ReserveBooking
 {
-    internal sealed class ReserveBookingCommandHandler : ICommandHandler<ReserveBookingCommand, ErrorOr<Guid>>
+    internal sealed class ReserveBookingCommandHandler : ICommandHandler<ReserveBookingCommand, ErrorOr<BookingId>>
     {
         private readonly IUserRepository _userRepository;
         private readonly IAppartmentRepository _appartmentRepository;
@@ -39,16 +41,16 @@ namespace BookingAP.Application.Bookings.ReserveBooking
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<ErrorOr<Guid>> Handle(ReserveBookingCommand request, CancellationToken cancellationToken)
+        public async Task<ErrorOr<BookingId>> Handle(ReserveBookingCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetByIdAsync(request.userId, cancellationToken);
+            var user = await _userRepository.GetByIdAsync(new UserId(request.userId), cancellationToken);
 
             if (user is null)
             {
                 return DomainError.NotFound(UserErrors.NotFound);
             }
 
-            var appartment = await _appartmentRepository.GetByIdAsync(request.appartmentId, cancellationToken);
+            var appartment = await _appartmentRepository.GetByIdAsync(new AppartmentId(request.appartmentId), cancellationToken);
 
             if (appartment is null)
             {
@@ -64,7 +66,7 @@ namespace BookingAP.Application.Bookings.ReserveBooking
 
             try
             {
-                var booking = Booking.Reserve(request.userId,
+                var booking = Booking.Reserve(new UserId(request.userId),
                                          appartment,
                                          duration,
                                          _bookingPricingService,

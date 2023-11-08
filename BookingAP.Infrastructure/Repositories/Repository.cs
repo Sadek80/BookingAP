@@ -3,7 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookingAP.Infrastructure.Repositories
 {
-    internal class Repository<T> : IRepository<T> where T : Entity
+    internal class Repository<TEntity, TEntityId> : IRepository<TEntity, TEntityId> where TEntity : Entity<TEntityId>
+        where TEntityId : class, IEntityId<TEntityId>
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -12,21 +13,21 @@ namespace BookingAP.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public void Add(T entity)
+        public void Add(TEntity entity)
         {
-            _dbContext.Set<T>().Add(entity);
+            _dbContext.Set<TEntity>().Add(entity);
         }
 
-        public async Task<T> AddAsync(T entity, CancellationToken cancellationToken = default)
+        public async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
-            var entityAdded = await _dbContext.Set<T>().AddAsync(entity, cancellationToken);
+            var entityAdded = await _dbContext.Set<TEntity>().AddAsync(entity, cancellationToken);
 
             return entityAdded.Entity;
         }
 
-        public async Task<T?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+        public async Task<TEntity?> GetByIdAsync(TEntityId id, CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Set<T>().FirstOrDefaultAsync(f => f.Id == id, cancellationToken);
+            return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(f => f.Id == id, cancellationToken);
         }
     }
 }

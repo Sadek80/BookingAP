@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookingAP.Infrastructure.Repositories.Bookings
 {
-    internal sealed class BookingRepository : Repository<Booking>, IBookingRepository
+    internal sealed class BookingRepository : Repository<Booking, BookingId>, IBookingRepository
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
@@ -28,9 +28,10 @@ namespace BookingAP.Infrastructure.Repositories.Bookings
             _mapper = mapper;
         }
 
-        public async Task<TResult?> GetBookingDetails<TResult>(Guid bookingId, CancellationToken cancellationToken = default)
+        public async Task<TResult?> GetBookingDetails<TResult>(BookingId bookingId, CancellationToken cancellationToken = default)
         {
             return await _dbContext.Set<Booking>()
+                                   .Where(f => f.Id == bookingId)
                                    .AsNoTracking()
                                    .ProjectTo<TResult>(_mapper.ConfigurationProvider)
                                    .FirstOrDefaultAsync(cancellationToken);
@@ -42,7 +43,7 @@ namespace BookingAP.Infrastructure.Repositories.Bookings
                       .Set<Booking>()
                       .AnyAsync(
                           booking =>
-                              booking.Id == apartment.Id &&
+                              booking.AppartmentId == apartment.Id &&
                               booking.Duration.Start <= duration.End &&
                               booking.Duration.End >= duration.Start &&
                               ActiveBookingStatuses.Contains(booking.Status),

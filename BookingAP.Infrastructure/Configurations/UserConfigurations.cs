@@ -13,6 +13,9 @@ namespace BookingAP.Infrastructure.Configurations
 
             builder.HasKey(x => x.Id);
 
+            builder.Property(p => p.Id)
+                   .HasConversion(id => id.Value, value => new UserId(value));
+
             builder.Property(user => user.FirstName)
                 .HasMaxLength(200)
                 .HasConversion(firstName => firstName.Value, value => new FirstName(value));

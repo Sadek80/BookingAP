@@ -2,6 +2,7 @@
 using BookingAP.Application.Abstractions.Messaging;
 using BookingAP.Domain.Abstractions;
 using BookingAP.Domain.Bookings.Repositories;
+using BookingAP.Domain.Bookings.ValueObjects;
 using ErrorOr;
 using static BookingAP.Domain.Bookings.DomainErrors;
 
@@ -25,7 +26,7 @@ internal sealed class ConfirmBookingCommandHandler : ICommandHandler<ConfirmBook
 
     public async Task<ErrorOr<bool>> Handle(ConfirmBookingCommand request, CancellationToken cancellationToken)
     {
-        var booking = await _bookingRepository.GetByIdAsync(request.BookingId, cancellationToken);
+        var booking = await _bookingRepository.GetByIdAsync(new BookingId(request.BookingId), cancellationToken);
 
         if (booking is null)
         {

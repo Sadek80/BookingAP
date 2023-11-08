@@ -4,9 +4,9 @@ using BookingAP.Domain.Users.ValueObjects;
 
 namespace BookingAP.Domain.Users
 {
-    public sealed class User : Entity
+    public sealed class User : Entity<UserId>
     {
-        private User(Guid Id, 
+        private User(UserId Id, 
                     FirstName firstName,
                     LastName lastName,
                     Email email)
@@ -29,7 +29,7 @@ namespace BookingAP.Domain.Users
                                   LastName lastName,
                                   Email email)
         {
-            var user = new User(Guid.NewGuid(), firstName, lastName, email);
+            var user = new User(UserId.New, firstName, lastName, email);
 
             user.RaisDomainEvent(new UserCreatedDomainEvent(user.Id));
 

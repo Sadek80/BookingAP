@@ -3,6 +3,7 @@ using BookingAP.Application.Abstractions.Messaging;
 using BookingAP.Application.Bookings.GetBooking;
 using BookingAP.Domain.Abstractions;
 using BookingAP.Domain.Bookings.Repositories;
+using BookingAP.Domain.Bookings.ValueObjects;
 using ErrorOr;
 using static BookingAP.Domain.Bookings.DomainErrors;
 
@@ -19,7 +20,7 @@ internal sealed class GetBookingQueryHandler : IQueryHandler<GetBookingQuery, Er
 
     public async Task<ErrorOr<BookingResponse>> Handle(GetBookingQuery request, CancellationToken cancellationToken)
     {
-        var booking = await _bookingRepository.GetBookingDetails<BookingResponse>(request.BookingId, cancellationToken);
+        var booking = await _bookingRepository.GetBookingDetails<BookingResponse>(new BookingId(request.BookingId), cancellationToken);
 
         if(booking is null)
         {

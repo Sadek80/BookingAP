@@ -1,6 +1,7 @@
 ﻿using BookingAP.Domain.Abstractions;
+using BookingAP.Domain.Bookings.ValueObjects;
 
 namespace BookingAP.Domain.Bookings.Events
 {
-    public record BookingConfirmedDomainEvent(Guid BookingId) : IDomainEvent;
+    public record BookingConfirmedDomainEvent(BookingId BookingId) : IDomainEvent;
 }
