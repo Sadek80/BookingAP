@@ -25,6 +25,8 @@ if (app.Environment.IsDevelopment())
     //app.SeedData();
 }
 
+app.UseHangfireDashboard();
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

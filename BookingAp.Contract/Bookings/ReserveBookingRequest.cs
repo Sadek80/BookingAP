@@ -1,4 +1,4 @@
-﻿namespace BookingAp.API.Controllers.Bookings
+﻿namespace BookingAp.Contract.Bookings
 {
     public sealed record ReserveBookingRequest(
         Guid ApartmentId,

@@ -1,4 +1,5 @@
-﻿using BookingAP.Application.Reviews.AddReview;
+﻿using BookingAp.Contract.Reviews;
+using BookingAP.Application.Reviews.AddReview;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

@@ -3,6 +3,9 @@ using BookingAP.Application.Abstractions.Data;
 using BookingAP.Domain.Appartments.Enums;
 using BookingAP.Infrastructure;
 using Dapper;
+using Hangfire;
+using Hangfire.Dashboard;
+using Hangfire.Annotations;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookingAp.API.Extensions;
@@ -58,9 +61,20 @@ public static class ApplicationBuilderExtensions
         connection.Execute(sql, apartments);
     }
 
+    public static void UseHangfireDashboard(this IApplicationBuilder app)
+    {
+        app.UseHangfireDashboard($"/hangfire", new DashboardOptions()
+        {
+            Authorization = new[] { new HangfireAuthorizationFilter() },
+            IgnoreAntiforgeryToken = true
+        });
+    }
+}
 
-    //public static void UseCustomExceptionHandler(this IApplicationBuilder app)
-    //{
-    //    app.UseMiddleware<ExceptionHandlingMiddleware>();
-    //}
+public class HangfireAuthorizationFilter : IDashboardAuthorizationFilter
+{
+    public bool Authorize([NotNull] DashboardContext context)
+    {
+        return true;
+    }
 }

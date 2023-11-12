@@ -1,4 +1,6 @@
-﻿using BookingAP.Application.Bookings.GetBooking;
+﻿using BookingAp.Contract.Bookings;
+using BookingAP.Application.Abstractions.Authentication;
+using BookingAP.Application.Bookings.GetBooking;
 using BookingAP.Application.Bookings.ReserveBooking;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +12,12 @@ namespace BookingAp.API.Controllers.Bookings;
 public class BookingsController : ApiController
 {
     private readonly ISender _sender;
+    private readonly IUserContext _userContext;
 
-    public BookingsController(ISender sender)
+    public BookingsController(ISender sender, IUserContext userContext)
     {
         _sender = sender;
+        _userContext = userContext;
     }
 
     [HttpGet("{id}")]
@@ -33,8 +37,8 @@ public class BookingsController : ApiController
         CancellationToken cancellationToken)
     {
         var command = new ReserveBookingCommand(
+            _userContext.IdentityId,
             request.ApartmentId,
-            request.UserId,
             request.StartDate,
             request.EndDate);
 
