@@ -1,6 +1,8 @@
-﻿namespace BookingAp.Contract.Bookings
+﻿using BookingAP.Domain.Bookings.Abstractions;
+
+namespace BookingAp.Contract.Bookings
 {
-    public sealed class BookingResponse
+    public sealed class BookingResponse : IBookingResponse
     {
         public Guid Id { get; init; }
 

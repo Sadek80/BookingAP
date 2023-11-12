@@ -9,6 +9,9 @@ namespace BookingAP.Infrastructure.Mappings
         public BookingMappingProfile()
         {
             CreateProjection<Booking, BookingResponse>()
+                .ForMember(dest => dest.Id, src => src.MapFrom(p => p.Id.Value))
+                .ForMember(dest => dest.UserId, src => src.MapFrom(p => p.UserId.Value))
+                .ForMember(dest => dest.ApartmentId, src => src.MapFrom(p => p.AppartmentId.Value))
                 .ForMember(d => d.Status, s => s.MapFrom(sf => sf.Status.ToString()))
                 .ForMember(d => d.PriceAmount, s => s.MapFrom(sf => sf.PriceForPeriod.Amount))
                 .ForMember(d => d.PriceCurrency, s => s.MapFrom(sf => sf.PriceForPeriod.Currency.Code))

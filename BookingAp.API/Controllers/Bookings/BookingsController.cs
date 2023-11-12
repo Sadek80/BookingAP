@@ -20,7 +20,7 @@ public class BookingsController : ApiController
         _userContext = userContext;
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id}", Name = "GetBooking")]
     public async Task<IActionResult> GetBooking(Guid id, CancellationToken cancellationToken)
     {
         var query = new GetBookingQuery(id);
@@ -49,6 +49,6 @@ public class BookingsController : ApiController
             return Problem(result.Errors);
         }
 
-        return CreatedAtAction(nameof(GetBooking), new { id = result.Value }, result.Value);
+        return CreatedAtAction(nameof(GetBooking), new { id = result.Value.Value }, result.Value);
     }
 }

@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using BookingAP.Domain.Appartments;
 using BookingAP.Domain.Bookings;
+using BookingAP.Domain.Bookings.Abstractions;
 using BookingAP.Domain.Bookings.Enums;
 using BookingAP.Domain.Bookings.Repositories;
 using BookingAP.Domain.Bookings.ValueObjects;
@@ -28,7 +29,7 @@ namespace BookingAP.Infrastructure.Repositories.Bookings
             _mapper = mapper;
         }
 
-        public async Task<TResult?> GetBookingDetails<TResult>(BookingId bookingId, CancellationToken cancellationToken = default)
+        public async Task<TResult?> GetBookingDetails<TResult>(BookingId bookingId, CancellationToken cancellationToken = default) where TResult : IBookingResponse
         {
             return await _dbContext.Set<Booking>()
                                    .Where(f => f.Id == bookingId)
