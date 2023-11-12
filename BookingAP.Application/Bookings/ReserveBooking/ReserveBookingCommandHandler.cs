@@ -1,4 +1,5 @@
-﻿using BookingAP.Application.Abstractions.Clock;
+﻿using BookingAp.Contract.Users;
+using BookingAP.Application.Abstractions.Clock;
 using BookingAP.Application.Abstractions.Messaging;
 using BookingAP.Domain.Abstractions;
 using BookingAP.Domain.Appartments.Repositories;
@@ -43,9 +44,9 @@ namespace BookingAP.Application.Bookings.ReserveBooking
 
         public async Task<ErrorOr<BookingId>> Handle(ReserveBookingCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetByIdAsync(new UserId(request.userId), cancellationToken);
+            var userIdDto = await _userRepository.GetUserByIdentityIdAsync<UserIdDto>(request.userIdentityId, cancellationToken);
 
-            if (user is null)
+            if (userIdDto is null)
             {
                 return DomainError.NotFound(UserErrors.NotFound);
             }
@@ -66,7 +67,7 @@ namespace BookingAP.Application.Bookings.ReserveBooking
 
             try
             {
-                var booking = Booking.Reserve(new UserId(request.userId),
+                var booking = Booking.Reserve(new UserId(userIdDto.Id),
                                          appartment,
                                          duration,
                                          _bookingPricingService,

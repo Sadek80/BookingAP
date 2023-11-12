@@ -4,7 +4,7 @@ using ErrorOr;
 
 namespace BookingAP.Application.Bookings.ReserveBooking
 {
-    public sealed record ReserveBookingCommand(Guid userId,
+    public sealed record ReserveBookingCommand(string userIdentityId,
                                                Guid appartmentId,
                                                DateOnly startDate,
                                                DateOnly endDate) : ICommand<ErrorOr<BookingId>>;

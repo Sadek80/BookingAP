@@ -2,7 +2,6 @@
 using BookingAP.Domain.Bookings.Events;
 using BookingAP.Domain.Bookings.Repositories;
 using BookingAP.Domain.Users.Repositories;
-using BookingAP.Domain.Users.ValueObjects;
 using MediatR;
 
 namespace BookingAP.Application.Bookings.ConfirmBooking
@@ -21,6 +20,7 @@ namespace BookingAP.Application.Bookings.ConfirmBooking
             _userRepository = userRepository;
             _emailService = emailService;
         }
+
         public async Task Handle(BookingConfirmedDomainEvent notification, CancellationToken cancellationToken)
         {
             var booking = await _bookingRepository.GetByIdAsync(notification.BookingId, cancellationToken);

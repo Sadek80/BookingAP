@@ -2,7 +2,6 @@
 using BookingAP.Domain.Bookings.Events;
 using BookingAP.Domain.Bookings.Repositories;
 using BookingAP.Domain.Users.Repositories;
-using BookingAP.Domain.Users.ValueObjects;
 using MediatR;
 
 namespace BookingAP.Application.Bookings.ReserveBooking
