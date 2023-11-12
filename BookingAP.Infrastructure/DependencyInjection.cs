@@ -73,6 +73,9 @@ namespace BookingAP.Infrastructure
                 options.UseInternalServiceProvider(serviceProvider);
             });
 
+            services.AddSingleton<ISqlConnectionFactory>(_ =>
+                    new SqlConnectionFactory(connectionString));
+
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IAppartmentRepository, AppartmentRepository>();
@@ -82,9 +85,6 @@ namespace BookingAP.Infrastructure
             services.AddScoped<IReviewRepository, ReviewRepository>();
 
             services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
-
-            services.AddSingleton<ISqlConnectionFactory>(_ =>
-                                new SqlConnectionFactory(connectionString));
 
             SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());
 

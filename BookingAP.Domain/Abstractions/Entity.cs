@@ -22,7 +22,7 @@
 
         public IReadOnlyList<IDomainEvent> GetDomainEvents()
         {
-            return _domainEvents;
+            return _domainEvents.ToList();
         }
 
         protected void RaisDomainEvent(IDomainEvent domainEvent)

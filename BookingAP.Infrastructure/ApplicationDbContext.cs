@@ -2,6 +2,7 @@
 using BookingAP.Domain.Abstractions;
 using BookingAP.Domain.Exceptions;
 using BookingAP.Infrastructure.Scheduling;
+using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
@@ -52,7 +53,7 @@ namespace BookingAP.Infrastructure
 
                     return domainEvents;
                 })
-                .AsEnumerable();
+                .AsList();
 
             _backgroundService.Enqueue<ProcessCoreEventJob>(e => e.Process(domainEvents));
         }

@@ -11,6 +11,7 @@ namespace BookingAP.Infrastructure.Scheduling
         {
             _publisher = publisher;
         }
+
         public async Task Process(IDomainEvent domainEvent)
         {
             await _publisher.Publish(domainEvent);
@@ -18,9 +19,10 @@ namespace BookingAP.Infrastructure.Scheduling
 
         public async Task Process(IEnumerable<IDomainEvent> domainEvents)
         {
-            foreach (var domainEvent in domainEvents)
+            foreach(var domainEvent in domainEvents)
             {
                 await _publisher.Publish(domainEvent);
+
             }
         }
     }
